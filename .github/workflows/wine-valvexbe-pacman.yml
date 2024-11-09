@@ -1,4 +1,4 @@
-name: Wine Valve exp bleeding edge Pacman CI
+name: Wine Valve exp bleeding edge Pacman CI Wow64
 
 on:
   schedule:
@@ -20,6 +20,7 @@ jobs:
           chown user -R . && cd wine-tkg-git
           sed -i 's/LOCAL_PRESET=""/LOCAL_PRESET="valve-exp-bleeding"/' customization.cfg
           sed -i 's/wayland_driver="false"/wayland_driver="true"/' customization.cfg
+          sed -i 's/_NOLIB32="false"/_NOLIB32="wow64"/' wine-tkg-profiles/advanced-customization.cfg
           su user -c "yes|PKGDEST=/tmp/wine-tkg makepkg --noconfirm -s"
 
       - name: Archive the artifacts
